@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn transferguide.wsgi
+web: gunicorn safe-ridge-06547.wsgi
