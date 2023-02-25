@@ -52,6 +52,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -161,5 +162,5 @@ SITE_ID = 5
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 LOGIN_URL = '/accounts/google/login'
-LOGIN_REDIRECT_URL = '/testing/'
+LOGIN_REDIRECT_URL = '/guide/testing/'
 LOGOUT_REDIRECT_URL = ''
