@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     "transferguideApp",
-    "bootstrap5",
+    "django-bootstrap5",
 ]
 
 MIDDLEWARE = [
