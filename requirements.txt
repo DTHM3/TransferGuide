@@ -10,3 +10,7 @@ gunicorn
 django-heroku
 django-allauth~=0.52.0
 django-rest-auth~=0.9.5
+
+
+# bootstrap5 testing
+bootstrap5
