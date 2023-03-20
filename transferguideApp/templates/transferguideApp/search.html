@@ -59,10 +59,15 @@
 
 <div>
 
-    <h1>Class Request Example</h1>
+    <h1>Search for Classes</h1>
     <form method="POST">
         {% csrf_token %}
+
+
+
+
         <button type="submit">Load Classes</button>
+
     </form>
 
     <label for="search">Search by subject:</label>
@@ -70,11 +75,20 @@
 
     <ul>
     {% for class in classes %}
-        <li class="class-item">
-            <h2>{{ class.subject }} - {{ class.class_description }}</h2>
-            <p>Instructors: {{ class.instructors }}</p>
-            <p>Units: {{ class.units }}</p>
-        </li>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ class.subject }} - {{ class.class_description }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Instructors: {{ class.instructors }}</h6>
+                <p class="card-text"> Units: {{ class.units }}</p>
+            </div>
+        </div>
+
+<!--        <li class="class-item">-->
+<!--            <h2>{{ class.subject }} - {{ class.class_description }}</h2>-->
+<!--            <p>Instructors: {{ class.instructors }}</p>-->
+<!--            <p>Units: {{ class.units }}</p>-->
+<!--        </li>-->
+
     {% endfor %}
     </ul>
 
