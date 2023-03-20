@@ -1,0 +1,105 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Class Request Example</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Perform API Request</button>
+    </form>
+    
+<ul>
+    {% for class in classes %}
+        <li>
+        <h2>{{ class.subject }} - {{ class.class_description }}</h2>
+        <p>Instructors: {{ class.instructors }}</p>
+        <p>Units: {{ class.units }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Class Request Example</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Perform API Request</button>
+    </form>
+
+    <form method="GET">
+        <label for="search_subject">Search Classes:</label>
+        <input type="text" id="search_subject" name="search_subject">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% for class in classes %}
+            <li>
+                <h2>{{ class.subject }} - {{ class.class_description }}</h2>
+                <p>Instructors: {{ class.instructors }}</p>
+                <p>Units: {{ class.units }}</p>
+            </li>
+        {% empty %}
+            <li>No classes found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Class Request Example</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Load Classes</button>
+    </form>
+
+    <label for="search">Search by subject:</label>
+    <input type="text" id="search" name="search">
+
+    <ul>
+    {% for class in classes %}
+        <li class="class-item">
+            <h2>{{ class.subject }} - {{ class.class_description }}</h2>
+            <p>Instructors: {{ class.instructors }}</p>
+            <p>Units: {{ class.units }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <script>
+        const searchField = document.querySelector('#search');
+
+        searchField.addEventListener('keyup', (event) => {
+            const searchQuery = event.target.value.toLowerCase();
+            const classItems = document.querySelectorAll('.class-item');
+            
+            classItems.forEach((item) => {
+                const subject = item.querySelector('h2').textContent.toLowerCase();
+
+                if (subject.includes(searchQuery)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

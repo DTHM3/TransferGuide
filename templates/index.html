@@ -7,8 +7,10 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-
 <html>
+  <head>
+    <title>Classes</title>
+  </head>
   <body>
     <div class="position-absolute top-0 start-50 translate-middle-x">
       <h1>Welcome User! Please Sign In!</h1>
@@ -17,6 +19,24 @@
       {% else %}
         <a href="{% provider_login_url 'google' %}">Login With Google</a>
       {% endif %}
+      
+      <form method="GET">
+        <label for="class_name">Search Classes:</label>
+        <input type="text" id="class_name" name="class_name">
+        <button type="submit">Search</button>
+      </form>
+
+        <h1>Classes</h1>
+      <ul>
+        {% for class in classes %}
+          <li>{{ class.subject }} - {{ class.class_description }} ({{ class.units }} units)</li>
+        {% empty %}
+          <li>No classes found.</li>
+        {% endfor %}
+      </ul>
+
     </div>
+
+    
   </body>
 </html>
