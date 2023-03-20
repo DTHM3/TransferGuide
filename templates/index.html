@@ -13,11 +13,17 @@
   </head>
   <body>
     <div class="position-absolute top-0 start-50 translate-middle-x">
-      <h1>Welcome User! Please Sign In!</h1>
       {% if user.is_authenticated %}
-        <p>Welcome, You are logged in as {{ user.username }}</p>
+        <div class="header">
+          <h1>Welcome {{ user.username }}!</h1>
+        </div>
       {% else %}
-        <a href="{% provider_login_url 'google' %}">Login With Google</a>
+        <div class="header">
+          <h1>Welcome!</h1>          
+        </div>
+        <div class="header">
+          <a class="btn btn-dark" href="{% provider_login_url 'google' %}">Login With Google</a>
+        </div>
       {% endif %}
       
       <form method="GET">
@@ -40,3 +46,65 @@
     
   </body>
 </html>
+
+<!--
+  <body>
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+      {% if user.is_authenticated %}
+        <div class="header">
+            <h1>Welcome {{ user.username }}!</h1>
+        </div>
+       
+      {% else %}
+
+        <div class="header">
+          <h1>Welcome!</h1>          
+        </div>
+        <div class="header">
+          <a class="btn btn-dark" href="{% provider_login_url 'google' %}">Login With Google</a>
+        </div>
+
+        
+        <div class="content">
+          <div class="sis-head">
+              <h2>UVA Classes</h2>
+              <div class="input-group mb-3">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Class</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                <button class="btn btn-outline-light">Search</button>
+              </div>
+          </div>
+          <div class="other-school-head">
+              <h2>
+                Equivalents from:<br>
+                school-name
+              </h2>
+          </div>
+          <div class="sis-content">
+            <div class="uva-classes">
+              
+              <div id="uva-class-title">
+                <div id="uva-professor-title">Professor</div>
+                <div id="uva-title-title">Course Title</div>
+                <div id="uva-id-title">Course Id</div>
+              </div>
+
+              <div class="uva-class">
+                <div class="uva-professor">Name</div>
+                <div class="uva-title">Example Course</div>
+                <div class="uva-id">Course Id</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="other-school-content"></div>
+      </div>
+    {% endif %}
+  </div>
+</body>
+-->
