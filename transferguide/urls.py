@@ -23,11 +23,10 @@ from django.urls import path, include
 
 from django.views.generic import TemplateView
 
-from transferguide import views
+# from transferguide.views import index
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html')),
-    path('', views.index),
+    path('', TemplateView.as_view(template_name= "transferguideApp/home.html")),
     path("admin/", admin.site.urls),
     path('guide/', include('transferguideApp.urls')),
 ]
