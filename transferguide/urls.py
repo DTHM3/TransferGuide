@@ -26,10 +26,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("admin-account-login/",TemplateView.as_view(template_name="admin.html")),
 
-    # path('', TemplateView.as_view(template_name="index.html")),
+    # path('', TemplateView.as_view(template_name="home.html")),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
     path('', render_template),
     
     path('guide/', include('transferguideApp.urls')),
+
 ]

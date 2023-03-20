@@ -6,8 +6,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-@login_required
-def index(request):
-    return HttpResponse("Hello, world. You're at the home page")
+# @login_required
+def index():
+    return ("Hello, world. You're at the home page")
 
 
+def say_hello(request):
+    return render(request, 'home.html', {})
