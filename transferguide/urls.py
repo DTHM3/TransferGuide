@@ -18,17 +18,28 @@ from allauth.account.views import LoginView
 
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView, LoginView
+from django.template.defaulttags import url
 from django.urls import path, include
+
 from django.views.generic import TemplateView
 
+# from transferguide.views import index
+
 urlpatterns = [
+    path('', TemplateView.as_view(template_name= "transferguideApp/home.html")),
     path("admin/", admin.site.urls),
-    path("admin-account-login/",TemplateView.as_view(template_name="admin.html")),
-
-    path('', TemplateView.as_view(template_name="index.html")),
-    path('accounts/', include('allauth.urls')),
-    path('logout', LogoutView.as_view()),
-
-
     path('guide/', include('transferguideApp.urls')),
 ]
+
+
+
+    # path("admin-account-login/",TemplateView.as_view(template_name="admin.html")),
+
+    # # path('', TemplateView.as_view(template_name="index.html")),
+    # path('accounts/', include('allauth.urls')),
+    # path('logout', LogoutView.as_view()),
+
+    # path('home/', views.say_hello),
+
+    # path('', render_template), # This is the path for search page
+

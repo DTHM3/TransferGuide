@@ -162,5 +162,5 @@ SITE_ID = 6
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 LOGIN_URL = '/accounts/google/login'
-LOGIN_REDIRECT_URL = '/guide/testing/'
+LOGIN_REDIRECT_URL = '/transferguideApp/testing/'
 LOGOUT_REDIRECT_URL = ''
