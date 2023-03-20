@@ -11,6 +11,7 @@ from django.views.generic import TemplateView
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from transferguideApp import views
 from transferguideApp.views import render_template
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
 #     path('', views.index),
 #
     path('search/', render_template),
+    path('news/', views.NewsView.as_view(), name='news'),
 ]

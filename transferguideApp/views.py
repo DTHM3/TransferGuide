@@ -3,6 +3,8 @@ from django.shortcuts import render
 
 
 from django.shortcuts import render
+from django.views import generic
+
 from transferguideApp.models import UVAClass
 import requests
 
@@ -10,7 +12,7 @@ import requests
 from django.http import JsonResponse
 from django.shortcuts import render
 import json
-from transferguideApp.models import UVAClass
+from transferguideApp.models import UVAClass, News
 
 # Create your views here.
 #
@@ -48,3 +50,13 @@ def render_template(request):
             classes.append(myclass)
 
     return render(request, 'transferguideApp/search.html', {'classes': classes})
+
+
+class NewsView(generic.ListView):
+    model = News
+    context_object_name = 'news_list'
+    template_name = 'transferguideApp/news.html'
+
+    def get_queryset(self):
+        # returns the latest news
+        return News.objects.all()
