@@ -59,6 +59,7 @@ def course_request(request):
         form = CourseRequestForm(request.POST)
         if form.is_valid():
             form.save()
+            # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
             return redirect('news') #To change after
         else:
