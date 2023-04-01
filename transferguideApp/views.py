@@ -1,18 +1,20 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
 
 from django.shortcuts import render
 from django.views import generic
+from django.views.generic import CreateView
 
 from transferguideApp.models import UVAClass
 import requests
 
 import requests
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
-import json
+
+from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
+
 
 # Create your views here.
 #
@@ -50,6 +52,20 @@ def render_template(request):
             classes.append(myclass)
 
     return render(request, 'transferguideApp/search.html', {'classes': classes})
+
+
+def course_request(request):
+    if request.method == 'POST':
+        form = CourseRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # User submits response now redirect them to home page
+            return redirect('news') #To change after
+        else:
+            return render(request, 'courserequest/courseRequest.html', {'form': form})
+    else:
+        form = CourseRequestForm()
+        return render(request, 'courserequest/courseRequest.html', {'form': form})
 
 
 class NewsView(generic.ListView):
