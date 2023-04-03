@@ -28,7 +28,11 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('', TemplateView.as_view(template_name= "transferguideApp/home.html")),
     path("admin/", admin.site.urls),
-    path('guide/', include('transferguideApp.urls'), name = 'guide'),
+
+    path('guide/', include('transferguideApp.urls')),
+    
+    path('accounts/', include('allauth.urls')),
+    path('logout', LogoutView.as_view()),
 ]
 
 

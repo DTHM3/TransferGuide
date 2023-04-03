@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-w2%x3gbocktx6f#-f&mfe-+gadr1##67z--rxv#94n!(vn#5wd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','transferguide-app.herokuapp.com', 'project-b-26.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','transferguide-app.herokuapp.com', 'project-b-26.herokuapp.com', 'safe-ridge-06547.herokuapp.com']
 
 
 # Application definition
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     "transferguideApp",
     "bootstrap5",
+    
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "transferguide.urls"
@@ -84,10 +87,21 @@ WSGI_APPLICATION = "transferguide.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "d9bdqn0dn5gikk",
+        "USER": "qqeypvosxuhene",
+        "PASSWORD": "a3bffb50e6ba8e059c9c5ce164bd55927cdb3f18b0a8ec21c062a9620e474910",
+        "HOST": "ec2-54-173-77-184.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
 
@@ -126,7 +140,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
@@ -158,9 +172,9 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 6
+SITE_ID = 7
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 LOGIN_URL = '/accounts/google/login'
-LOGIN_REDIRECT_URL = '/transferguideApp/testing/'
-LOGOUT_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
