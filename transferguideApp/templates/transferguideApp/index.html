@@ -32,6 +32,9 @@
     </div>
   </div>
 </nav>
+{% if user.is_staff %}
+  <p>Welcome, You are a staff logged in as {{ user.username }}</p>
+{% endif %}
 {% if user.is_authenticated %}
   {% block content %}
   {% endblock %}
