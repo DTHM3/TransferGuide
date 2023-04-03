@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load socialaccount %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,8 +32,15 @@
     </div>
   </div>
 </nav>
-    {% block content %}
-    {% endblock %}
+{% if user.is_staff %}
+  <p>Welcome, You are a staff logged in as {{ user.username }}</p>
+{% endif %}
+{% if user.is_authenticated %}
+  {% block content %}
+  {% endblock %}
+{% else %}
+  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+{% endif %}
 <!--navbar-->
 </body>
 
