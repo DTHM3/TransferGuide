@@ -172,7 +172,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 6
+SITE_ID = 7
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 LOGIN_URL = '/accounts/google/login'
