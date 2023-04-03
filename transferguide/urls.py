@@ -30,7 +30,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('guide/', include('transferguideApp.urls')),
     
-    path('accounts/', include('transferguideApp.urls')),
+    path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
 ]
 
