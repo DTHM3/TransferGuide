@@ -31,8 +31,13 @@
     </div>
   </div>
 </nav>
-    {% block content %}
-    {% endblock %}
+    
+  {% if user.is_authenticated %}
+      {% block content %}
+      {% endblock %}
+  {% else %}
+      <a href="{% provider_login_url 'google' %}">Login With Google</a>
+  {% endif %}
 <!--navbar-->
 </body>
 
