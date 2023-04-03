@@ -14,3 +14,10 @@ from .models import UVAClass
 #     def test_search_success(self):
 #         response = self.client.get("/guide/search/")
 #         self.assertContains(response, "id")
+#     def test_search_fail(self):
+#         response = self.client.get("/guide/search/")
+#         self.assertNotContains(response, "asdfjsd")
+
+#     def test_more(self):
+#        response = self.client.get("/guide/search/")
+#        self.assertTrue(self, True)
