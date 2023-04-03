@@ -1,78 +1,24 @@
 {% extends "transferguideApp/index.html" %}
 {% block content %}
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>My Page</title>
-</head>
-<body>
-    <h1>Class Request Example</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit">Perform API Request</button>
-    </form>
-    
-<ul>
-    {% for class in classes %}
-        <li>
-        <h2>{{ class.subject }} - {{ class.class_description }}</h2>
-        <p>Instructors: {{ class.instructors }}</p>
-        <p>Units: {{ class.units }}</p>
-        </li>
-    {% endfor %}
-    </ul>
-</body>
-</html> -->
-
-<!-- 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Page</title>
-</head>
-<body>
-    <h1>Class Request Example</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit">Perform API Request</button>
-    </form>
-
-    <form method="GET">
-        <label for="search_subject">Search Classes:</label>
-        <input type="text" id="search_subject" name="search_subject">
-        <button type="submit">Search</button>
-    </form>
-
-    <ul>
-        {% for class in classes %}
-            <li>
-                <h2>{{ class.subject }} - {{ class.class_description }}</h2>
-                <p>Instructors: {{ class.instructors }}</p>
-                <p>Units: {{ class.units }}</p>
-            </li>
-        {% empty %}
-            <li>No classes found.</li>
-        {% endfor %}
-    </ul>
-</body>
-</html> -->
 
 <div>
 
     <h1>Search for Classes</h1>
     <form method="POST">
         {% csrf_token %}
-
-
-
-
-        <button type="submit">Load Classes</button>
-
+        <div style="display: flex; align-items: center;">
+            <label for="searchType">Search by</label>
+            <select id="searchType" name="searchType" style="height: 2rem;">
+                <option value="subject">Subject Type</option>
+                <option value="professor">Professor Name</option>
+                <!-- <option value="department">Department</option> -->
+                <!-- <option value="course_mnemonic">Course Mnemonic</option> -->
+            </select>
+            <input type="text" id="search" name="search" style="height: 2rem;">
+        </div>
+        <button type="submit">Search Classes</button>
     </form>
-
-    <label for="search">Search by subject:</label>
-    <input type="text" id="search" name="search">
-
+    
     <ul>
     {% for class in classes %}
         <div class="card" style="width: 18rem;">
@@ -82,25 +28,17 @@
                 <p class="card-text"> Units: {{ class.units }}</p>
             </div>
         </div>
-
-<!--        <li class="class-item">-->
-<!--            <h2>{{ class.subject }} - {{ class.class_description }}</h2>-->
-<!--            <p>Instructors: {{ class.instructors }}</p>-->
-<!--            <p>Units: {{ class.units }}</p>-->
-<!--        </li>-->
-
     {% endfor %}
     </ul>
 
-    <script>
+    <!-- <script>
         const searchField = document.querySelector('#search');
-
         searchField.addEventListener('keyup', (event) => {
             const searchQuery = event.target.value.toLowerCase();
-            const classItems = document.querySelectorAll('.class-item');
+            const classItems = document.querySelectorAll('.card');
             
             classItems.forEach((item) => {
-                const subject = item.querySelector('h2').textContent.toLowerCase();
+                const subject = item.querySelector('.card-title').textContent.toLowerCase();
 
                 if (subject.includes(searchQuery)) {
                     item.style.display = '';
@@ -109,8 +47,8 @@
                 }
             });
         });
-    </script>
+    </script> -->
 </div>
 
-
 {% endblock %}
+

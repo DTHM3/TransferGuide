@@ -1,18 +1,20 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
 
 from django.shortcuts import render
 from django.views import generic
+from django.views.generic import CreateView
 
 from transferguideApp.models import UVAClass
 import requests
 
 import requests
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
-import json
+
+from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
+
 
 # Create your views here.
 #
@@ -32,15 +34,27 @@ def render_template(request):
     classes = []
 
     if request.method == 'POST':
-        # Define the URL and payload for the POST request
-        url = 'https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1232&page=1'
+        search_type = request.POST['searchType']
+        search_value = request.POST['search']
+        # print(search_type)
+        # print(search_value)
+
+        # Modify the URL and payload based on search_type and search_value
+        # For example, if search_type is "subject", you might add a query parameter for the subject
+        # You need to update the URL according to the API documentation for the expected search parameters
+        url = ""
+        subjectURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&subject={search_value.upper()}&page=1"
+        instructorURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&instructor_name={search_value}"
+        if(search_type == "subject"):
+            url = subjectURL
+        elif(search_type == "professor"):
+            url = instructorURL
+        print(url)
         response = requests.get(url)
         response = response.json()
         print(response)
 
         for item in response:
-            # data = json.loads(item)
-
             myclass = UVAClass()
             myclass.class_id = item['crse_id'] + '-' + str(item['crse_offer_nbr'])
             myclass.subject = item['subject']
@@ -50,6 +64,22 @@ def render_template(request):
             classes.append(myclass)
 
     return render(request, 'transferguideApp/search.html', {'classes': classes})
+
+
+
+def course_request(request):
+    if request.method == 'POST':
+        form = CourseRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # user = request.user to add after we add authentication
+            # User submits response now redirect them to home page
+            return redirect('news') #To change after
+        else:
+            return render(request, 'courserequest/courseRequest.html', {'form': form})
+    else:
+        form = CourseRequestForm()
+        return render(request, 'courserequest/courseRequest.html', {'form': form})
 
 
 class NewsView(generic.ListView):
