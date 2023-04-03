@@ -34,15 +34,27 @@ def render_template(request):
     classes = []
 
     if request.method == 'POST':
-        # Define the URL and payload for the POST request
-        url = 'https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1232&page=1'
+        search_type = request.POST['searchType']
+        search_value = request.POST['search']
+        # print(search_type)
+        # print(search_value)
+
+        # Modify the URL and payload based on search_type and search_value
+        # For example, if search_type is "subject", you might add a query parameter for the subject
+        # You need to update the URL according to the API documentation for the expected search parameters
+        url = ""
+        subjectURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&subject={search_value.upper()}&page=1"
+        instructorURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&instructor_name={search_value}"
+        if(search_type == "subject"):
+            url = subjectURL
+        elif(search_type == "professor"):
+            url = instructorURL
+        print(url)
         response = requests.get(url)
         response = response.json()
         print(response)
 
         for item in response:
-            # data = json.loads(item)
-
             myclass = UVAClass()
             myclass.class_id = item['crse_id'] + '-' + str(item['crse_offer_nbr'])
             myclass.subject = item['subject']
@@ -52,6 +64,7 @@ def render_template(request):
             classes.append(myclass)
 
     return render(request, 'transferguideApp/search.html', {'classes': classes})
+
 
 
 def course_request(request):
