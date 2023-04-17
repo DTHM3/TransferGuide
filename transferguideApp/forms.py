@@ -26,7 +26,7 @@ class CourseRequestForm(forms.ModelForm):
         validator = URLValidator()
         try:
             validator(url)
-            return True
+            return url
         except ValidationError:
             raise forms.ValidationError('Please enter a valid url for your institution')
 

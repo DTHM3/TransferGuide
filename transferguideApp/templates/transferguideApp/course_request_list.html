@@ -29,7 +29,18 @@
     </div>
 </div>
 {% else %}
-    <div> View Course Requests...</div>
+<h1>Course Requests</h1>
+    <ul>
+    {% for course_request in course_requests %}
+        <li>
+        <a href="{% url 'course_request_detail' id=course_request.id %}">
+            {{ course_request.title }} ({{ course_request.status }})
+        </a>
+        </li>
+    {% empty %}
+        <li>No course requests found.</li>
+    {% endfor %}
+    </ul>
     {% if user.is_staff %}
     {% else %}
     {% endif %}

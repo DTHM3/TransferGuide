@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.generic import CreateView
 
@@ -14,6 +14,7 @@ from django.shortcuts import render
 
 from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
+from .models import CourseRequest
 
 
 # Create your views here.
@@ -101,4 +102,14 @@ class NewsView(generic.ListView):
         return News.objects.all()
     
 
-    
+def course_request_list(request):
+    course_requests = CourseRequest.objects.all()
+    return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
+
+def course_request_list(request):
+    course_requests = CourseRequest.objects.all()
+    return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
+
+def course_request_detail(request, id):
+    course_request = get_object_or_404(CourseRequest, id=id)
+    return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})
