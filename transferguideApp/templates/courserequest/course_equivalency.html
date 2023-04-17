@@ -83,7 +83,8 @@
     <table class="course-table">
         <thead>
             <tr>
-                <th>Title</th>
+                <th>Transfer Course</th>
+                <th>UVA Course</th>
                 <th>Course Subject</th>
                 <th>Transfer Institution</th>
                 <th>Credits</th>
@@ -94,6 +95,7 @@
             {% for course in courses %}
             <tr>
                 <td>{{ course.title }}</td>
+                 <td>{{ course.course_equivalency }}</td>
                 <td>{{ course.course_subject }}</td>
                 <td>{{ course.transfer_institution }}</td>
                 <td>{{ course.credits }}</td>
