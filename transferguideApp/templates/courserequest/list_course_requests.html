@@ -1,0 +1,137 @@
+{% extends 'transferguideApp/index.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+<style>
+.login-container {
+    background-image: url("/static/images/uva_project.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.login-button {
+    width: 20%;
+    max-width: 90%;
+    margin:  auto;
+    position: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 40vh;
+
+}
+
+.PENDING {
+  color: orange;
+}
+
+.APPROVED {
+  color: green;
+}
+
+.DENIED {
+  color: red;
+}
+
+
+.course-request-table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.course-request-table th, .course-request-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.course-request-table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+.course-request-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+@media screen and (max-width: 600px) {
+  .course-request-table th, .course-request-table td {
+    display: block;
+    width: 100%;
+    text-align: right;
+  }
+  
+  .course-request-table th {
+    text-align: right;
+  }
+}
+</style>
+
+{% if not user.is_authenticated %}
+{% else %}
+    {% comment %} <h1>Course Requests</h1>
+    <ul>
+    {% for course_request in course_requests %}
+        <li>
+        <a href="{% url 'course_request_detail' id=course_request.id %}">
+            {{ course_request.title }} ({{ course_request.status }})
+        </a>
+        </li>
+    {% empty %}
+        <li>No course requests found.</li>
+    {% endfor %}
+    </ul> {% endcomment %}
+
+    <h1>My Course Requests</h1>
+    <table class="table course-request-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Course Subject</th>
+          <th>Credits</th>
+          <th>Transfer Institution</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course_request in course_requests %}
+          <tr>
+            <td>{{ course_request.id }}</td>
+            <td>{{ course_request.title }}</td>
+            <td>{{ course_request.course_subject }}</td>
+            <td>{{ course_request.credits }}</td>
+            <td>{{ course_request.transfer_institution }}</td>
+            {% if course_request.status == "PENDING" %}
+              <td class="PENDING">{{ course_request.status }}</td>
+            {% elif course_request.status == "APPROVED" %}
+              <td class="APPROVED">{{ course_request.status }}</td>
+            {% elif course_request.status == "DENIED" %}
+              <td class="DENIED">{{ course_request.status }}</td>
+            {% endif %}
+            <td>
+              {% if user.is_staff %}
+                <a href="{% url 'course_request_detail' course_request.id %}" class="btn btn-sm btn-primary">Edit</a>
+              {% else %}
+                <a href="{% url 'course_request_detail' course_request.id %}" class="btn btn-sm btn-primary">View</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="7">You haven't submitted any course requests yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% if user.is_staff %}
+    {% else %}
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -12,13 +12,13 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 from transferguideApp import views
-from transferguideApp.views import render_template, course_request, login, course_requests, course_request_detail
+from transferguideApp.views import render_template, course_request, login, list_course_requests, course_request_detail
 
 urlpatterns = [
     path('search/', render_template, name = 'search'),
     path('news/', views.NewsView.as_view(), name='news'),
     path('course-request/', course_request, name='course-request'),
-    path('course-requests/', course_requests, name='course-requests'),
+    path('course-requests/', list_course_requests, name='list_course_requests'),
     path('course-requests/<int:id>/', course_request_detail, name='course_request_detail'),
 
 ]

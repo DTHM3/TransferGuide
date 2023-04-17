@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.generic import CreateView
 
@@ -14,6 +14,8 @@ from django.shortcuts import render
 
 from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
+from .models import CourseRequest
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -30,6 +32,8 @@ def call_api(request):
 
 # # Function to render a template with the API response data
 def render_template(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     response = None
     classes = []
 
@@ -81,7 +85,7 @@ def course_request(request):
             course_request.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
-            return redirect('course-requests')  # To change after
+            return redirect('list_course_requests')  # To change after
         else:
             return render(request, 'courserequest/courseRequest.html', {'form': form})
     else:
@@ -106,24 +110,26 @@ class NewsView(generic.ListView):
 #     course_requests = CourseRequest.objects.all()
 #     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
 
-def course_requests(request):
+def list_course_requests(request):
     if not request.user.is_authenticated:
         return redirect('login')
     if request.user.is_staff:
         course_requests = CourseRequest.objects.all().order_by('id')
     else:
         course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
-    return render(request, 'courserequest/course-requests.html', {'course_requests': course_requests})
+    return render(request, 'courserequest/list_course_requests.html', {'course_requests': course_requests})
 
+ 
 def course_request_detail(request, id):
     if not request.user.is_authenticated:
         return redirect('login')
-    course_request = get_object_or_404(CourseRequest, id=id)
+    course_request = CourseRequest.objects.get(id=id)
 
     if request.method == 'POST':
         course_request.status = request.POST['status']
+        course_request.course_equivalency = request.POST['course_equivalency']
         course_request.save()
-        return redirect('course-requests')
+        return redirect('list_course_requests')
 
     return render(request, 'courserequest/course_request_detail.html', {'course_request': course_request})
 
