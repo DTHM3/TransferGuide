@@ -19,18 +19,22 @@
         </div>
         
     </form>
-    <div class="justify-content-center">
-        <ul>
-            {% for class in classes %}
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ class.subject }} - {{ class.class_description }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Instructors: {{ class.instructors }}</h6>
-                        <p class="card-text"> Units: {{ class.units }}</p>
+    <div style="display: flex; align-items: center;" class="justify-content-center">
+        {% if classes %}
+            <ul>
+                {% for class in classes %}
+                    <div class="card" style="width: 97%;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ class.subject }} - {{ class.class_description }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Instructors: {{ class.instructors }}</h6>
+                            <p class="card-text"> Units: {{ class.units }}</p>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
             </ul>
+        {% else %}
+            <h3 class="justify-text-center">No Classes From Search</h3>
+        {% endif %}
     </div>
     
 
