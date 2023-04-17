@@ -1,0 +1,8 @@
+{% extends 'transferguideApp/index.html' %}
+
+{% load static %}
+{% block content %}
+    <h1>{{ news.title }}</h1>
+    <p>{{ news.text }}</p>
+    <p>Date: {{ news.date }}</p>
+{% endblock %}
