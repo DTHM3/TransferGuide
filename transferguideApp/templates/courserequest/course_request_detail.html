@@ -87,11 +87,6 @@
 </style>
 
 {% if not user.is_authenticated %}
-<div class="login-container">
-    <div class="login-button" >
-    <button type="button" class="btn btn-warning" onclick="location.href='{% provider_login_url 'google' %}'">Login with Google</button>
-    </div>
-</div>
 {% else %}
     {% if user.is_staff %}
         {% comment %} <h1>{{ course_request.title }}</h1>

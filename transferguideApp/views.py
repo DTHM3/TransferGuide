@@ -108,6 +108,8 @@ class NewsView(generic.ListView):
 #     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
 
 def course_requests(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     if request.user.is_staff:
         course_requests = CourseRequest.objects.all().order_by('id')
     else:
@@ -115,6 +117,8 @@ def course_requests(request):
     return render(request, 'courserequest/course-requests.html', {'course_requests': course_requests})
 
 def course_request_detail(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
     course_request = get_object_or_404(CourseRequest, id=id)
 
     if request.method == 'POST':
