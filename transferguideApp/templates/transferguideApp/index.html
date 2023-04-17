@@ -10,7 +10,8 @@
   <!--navbar-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light ms-auto">
   <div class="container-fluid">
     <a class="navbar-brand" href="../../">Transfer Guide</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,15 +20,16 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="../../">Home</a>
+          <a class="nav-link active" aria-current="page" href='{% url 'home' %}'>Home</a>
         </li>
-        <li class="nav-item"> <a class="nav-link" href="/guide/news">News</a></li>
+        <li class="nav-item"> <a class="nav-link" href='{% url 'news' %}'>News</a></li>
+        <li class="nav-item"> <a class="nav-link" href='{% url 'search' %}'>Search</a></li>
         {% if user.is_authenticated %}
+        <li class="nav-item"> <a class="nav-link" href='{% url 'course-request' %}'>Request</a></li>
         <li class="nav-item"> <a class="nav-link" href="/logout">Logout</a></li>
-        {% else %}
-        <li class="nav-item"> <a class="nav-link" href="/login">Login</a></li>
+        {% comment %} {% else %}
+        <li class="nav-item"> <a class="nav-link" href="/login">Login</a></li> {% endcomment %}
         {% endif %}
-
       </ul>
     </div>
   </div>
