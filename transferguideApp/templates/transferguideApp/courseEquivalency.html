@@ -1,0 +1,59 @@
+{% extends 'transferguideApp/index.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Transfer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            background-color: #f1f1f1;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .university-buttons {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            font-size: 16px;
+            padding: 20px 40px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function goToUniversityPage(university) {
+            // Replace this with the appropriate routing logic for your application
+            window.location.href = `/${university.toLowerCase().split(' ').join('-')}-page`;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        What university are you transferring from?
+    </header>
+    
+    <div class="university-buttons">
+        <button onclick="goToUniversityPage('JMU')">University A</button>
+        <button onclick="goToUniversityPage('GMU')">University B</button>
+        <button onclick="goToUniversityPage('VCU')">University C</button>
+        <!-- <button onclick="goToUniversityPage('University D')">University D</button> -->
+    </div>
+</body>
+</html>
+
+{% endblock %}

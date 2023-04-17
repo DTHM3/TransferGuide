@@ -81,6 +81,10 @@ def course_request(request):
     return render(request, 'courserequest/courseRequest.html', {'form': form})
 
 
+def course_equivalency(request):
+    return render(request, 'transferguideApp/courseEquivalency.html')
+
+
 def login(request):
     return render(request, 'transferGuideApp/login.html')
 
