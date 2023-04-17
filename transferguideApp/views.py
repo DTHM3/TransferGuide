@@ -30,6 +30,8 @@ def call_api(request):
 
 # # Function to render a template with the API response data
 def render_template(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     response = None
     classes = []
 
@@ -67,13 +69,16 @@ def render_template(request):
 
 
 def course_request(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     if request.method == 'POST':
         form = CourseRequestForm(request.POST)
         if form.is_valid():
             form.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
-            return redirect('news')  # To change after
+            return redirect('home')  # To change after
         else:
             return render(request, 'courserequest/courseRequest.html', {'form': form})
     else:

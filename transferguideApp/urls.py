@@ -15,11 +15,6 @@ from transferguideApp import views
 from transferguideApp.views import render_template, course_request, login
 
 urlpatterns = [
-#     # Route, View (Function that returns HTTP Response) -> Returns HTTP Response
-#     # path('/', views.index),
-#     path('', views.index),
-#
-
     path('search/', render_template, name = 'search'),
     path('news/', views.NewsView.as_view(), name='news'),
     path('course-request/', course_request, name='course-request'),
