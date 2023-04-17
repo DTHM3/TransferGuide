@@ -29,7 +29,7 @@
     </div>
 </div>
 {% else %}
-<h1>Course Requests</h1>
+    {% comment %} <h1>Course Requests</h1>
     <ul>
     {% for course_request in course_requests %}
         <li>
@@ -40,7 +40,48 @@
     {% empty %}
         <li>No course requests found.</li>
     {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
+
+    <h1>Course Requests</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Course Subject</th>
+            <th>Credits</th>
+            <th>Transfer Institution</th>
+            <th>Status</th>
+            {% if request.user.is_staff %}
+            <th>User</th>
+            {% endif %}
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for course_request in course_requests %}
+            <tr>
+            <td>{{ course_request.id }}</td>
+            <td>{{ course_request.title }}</td>
+            <td>{{ course_request.course_subject }}</td>
+            <td>{{ course_request.credits }}</td>
+            <td>{{ course_request.transfer_institution }}</td>
+            <td>{{ course_request.status }}</td>
+            {% if request.user.is_staff %}
+                <td>{{ course_request.user }}</td>
+            {% endif %}
+            <td>
+                <a href="{% url 'course_request_detail' course_request.id %}">View</a>
+            </td>
+            </tr>
+        {% empty %}
+            <tr>
+            <td colspan="{% if request.user.is_staff %}8{% else %}7{% endif %}">No course requests found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
     {% if user.is_staff %}
     {% else %}
     {% endif %}

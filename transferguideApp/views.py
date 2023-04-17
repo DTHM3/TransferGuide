@@ -15,6 +15,7 @@ from django.shortcuts import render
 from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
 from .models import CourseRequest
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -107,9 +108,22 @@ def course_request_list(request):
     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
 
 def course_request_list(request):
-    course_requests = CourseRequest.objects.all()
+    if request.user.is_staff:
+        course_requests = CourseRequest.objects.all()
+    else:
+        course_requests = CourseRequest.objects.filter(user=request.user)
     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
 
 def course_request_detail(request, id):
     course_request = get_object_or_404(CourseRequest, id=id)
+
+    if request.method == 'POST':
+        course_request.status = request.POST['status']
+        course_request.save()
+        return redirect('course_request_list')
+
     return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})
+
+# def course_request_detail(request, id):
+#     course_request = get_object_or_404(CourseRequest, id=id)
+#     return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})

@@ -29,12 +29,39 @@
     </div>
 </div>
 {% else %}
-    <h1>{{ course_request.title }}</h1>
-    <p>Course Subject: {{ course_request.course_subject }}</p>
-    <p>Credits: {{ course_request.credits }}</p>
-    <p>Transfer Institution: {{ course_request.transfer_institution }}</p>
-    <p>URL: <a href="{{ course_request.url }}">{{ course_request.url }}</a></p>
-    <p>Status: {{ course_request.status }}</p>
-    <p>Submitted By: {{ course_request.user.username }}</p>
+    {% if user.is_staff %}
+        <h1>{{ user }}</h1>
+        <h1>{{ course_request.title }}</h1>
+        <p>Course Subject: {{ course_request.course_subject }}</p>
+        <p>Credits: {{ course_request.credits }}</p>
+        <p>Transfer Institution: {{ course_request.transfer_institution }}</p>
+        <p>URL: {{ course_request.url }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+            <option value="Pending" {% if course_request.status == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="Approved" {% if course_request.status == "Approved" %}selected{% endif %}>Approved</option>
+            <option value="Denied" {% if course_request.status == "Denied" %}selected{% endif %}>Denied</option>
+            </select>
+            <br>
+            <button type="submit">Save</button>
+        </form>
+    {% else %}
+        {% if user == course_request.user %}
+            <h1>{{ course_request.title }}</h1>
+            <p>Course Subject: {{ course_request.course_subject }}</p>
+            <p>Credits: {{ course_request.credits }}</p>
+            <p>Transfer Institution: {{ course_request.transfer_institution }}</p>
+            <p>URL: <a href="{{ course_request.url }}">{{ course_request.url }}</a></p>
+            <p>Status: {{ course_request.status }}</p>
+            {% comment %} <p>Submitted By: {{ course_request.user.username }}</p> {% endcomment %}
+        {% else %}
+            <h1>You Can't View This Course Request</h1>
+        {% endif %}
+        
+    {% endif %}
+    
+   
 {% endif %}
 {% endblock %}
