@@ -12,16 +12,21 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 from transferguideApp import views
+<<<<<<< HEAD
 from transferguideApp.views import render_template, course_request, login, course_equivalency
+=======
+from transferguideApp.views import render_template, course_request, login, list_course_requests, course_request_detail
+>>>>>>> 5ad5ac0effb2505c18112deeb9ce674f2dae3dbc
 
 urlpatterns = [
-#     # Route, View (Function that returns HTTP Response) -> Returns HTTP Response
-#     # path('/', views.index),
-#     path('', views.index),
-#
-
     path('search/', render_template, name = 'search'),
     path('news/', views.NewsView.as_view(), name='news'),
     path('course-request/', course_request, name='course-request'),
+<<<<<<< HEAD
     path('course-equivalency/', course_equivalency, name='course-equivalency'),
+=======
+    path('course-requests/', list_course_requests, name='list_course_requests'),
+    path('course-requests/<int:id>/', course_request_detail, name='course_request_detail'),
+
+>>>>>>> 5ad5ac0effb2505c18112deeb9ce674f2dae3dbc
 ]

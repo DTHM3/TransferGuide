@@ -2,34 +2,42 @@
 {% block content %}
 
 <div>
-
-    <h1>Search for Classes</h1>
+    <div style="display: flex; align-items: center;" class="justify-content-center m-5">
+        <h1 class="m-5">Search for Classes</h1>
+    </div>
     <form method="POST">
         {% csrf_token %}
-        <div style="display: flex; align-items: center;">
-            <label for="searchType">Search by</label>
+        <div style="display: flex; align-items: center;" class="justify-content-center m-5">
+            <label for="searchType"></label>
             <select id="searchType" name="searchType" style="height: 2rem;">
                 <option value="subject">Subject Type</option>
                 <option value="professor">Professor Name</option>
-                <!-- <option value="department">Department</option> -->
-                <!-- <option value="course_mnemonic">Course Mnemonic</option> -->
+                <option value="keyword">Keyword</option>
+                <option value="class-number">Class Number</option>
             </select>
             <input type="text" id="search" name="search" style="height: 2rem;">
+            <button type="submit">Search Classes</button>
         </div>
-        <button type="submit">Search Classes</button>
+        
     </form>
+    <div style="display: flex; align-items: center;" class="justify-content-center">
+        {% if classes %}
+            <ul>
+                {% for class in classes %}
+                    <div class="card" style="width: 97%;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ class.subject }} - {{ class.class_description }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Instructors: {{ class.instructors }}</h6>
+                            <p class="card-text"> Units: {{ class.units }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3 class="justify-text-center">No Classes From Search</h3>
+        {% endif %}
+    </div>
     
-    <ul>
-    {% for class in classes %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ class.subject }} - {{ class.class_description }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Instructors: {{ class.instructors }}</h6>
-                <p class="card-text"> Units: {{ class.units }}</p>
-            </div>
-        </div>
-    {% endfor %}
-    </ul>
 
     <!-- <script>
         const searchField = document.querySelector('#search');

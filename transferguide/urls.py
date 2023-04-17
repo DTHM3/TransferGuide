@@ -1,5 +1,4 @@
 """transferguide URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -28,9 +27,9 @@ from transferguideApp.views import login
 # from transferguide.views import index
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name= "transferguideApp/home.html")),
-    path("admin/", admin.site.urls),
+    path('', TemplateView.as_view(template_name= "transferguideApp/home.html"), name = 'home'),
 
+    path("admin/", admin.site.urls),
     path('login/', login, name='login'),
     path('guide/', include('transferguideApp.urls')),
     
