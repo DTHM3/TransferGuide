@@ -30,6 +30,8 @@ def call_api(request):
 
 # # Function to render a template with the API response data
 def render_template(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     response = None
     classes = []
 
