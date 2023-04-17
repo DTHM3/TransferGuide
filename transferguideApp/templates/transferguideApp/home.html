@@ -56,16 +56,16 @@
 </div>
     {% if user.is_staff %}
     <div class="home-page-button d-flex flex-column">
-        <button type="button"  onclick="location.href='{% url 'course-requests' %}'" class="btn btn-outline-secondary btn-lg">Review Course Request Equivalencies</button>
-        <button type="button" onclick="location.href='{% url 'course-request' %}'"  class="btn btn-outline-secondary btn-lg">Add Course Equivalency</button>
-        <button type="button" onclick="location.href='{% url 'search' %}'" class="btn btn-outline-secondary btn-lg">Search For UVA Courses</button>
+        <button type="button"  onclick="location.href='/guide/course-requests/'" class="btn btn-outline-secondary btn-lg">Review Course Request Equivalencies</button>
+        <button type="button" onclick="location.href='/guide/course-request/'"  class="btn btn-outline-secondary btn-lg">Add Course Equivalency</button>
+        <button type="button" onclick="location.href='/guide/search/'" class="btn btn-outline-secondary btn-lg">Search For UVA Courses</button>
 
     </div>
     {% else %}
     <div class="home-page-button d-flex flex-column">
-        <button type="button"  onclick="location.href='{% url 'course-requests' %}'" class="btn btn-outline-secondary btn-lg">View Course Requests</button>
-        <button type="button"  onclick="location.href='{% url 'course-request' %}'" class="btn btn-outline-secondary btn-lg">Submit Course for Equivalency</button>
-        <button type="button" onclick="location.href='{% url 'search' %}'" class="btn btn-outline-secondary btn-lg">Search For UVA Courses</button>
+        <button type="button"  onclick="location.href='/guide/course-requests/'" class="btn btn-outline-secondary btn-lg">View Course Requests</button>
+        <button type="button"  onclick="location.href='/guide/course-request/'" class="btn btn-outline-secondary btn-lg">Submit Course for Equivalency</button>
+        <button type="button" onclick="location.href='/guide/search/'" class="btn btn-outline-secondary btn-lg">Search For UVA Courses</button>
     </div>
     {% endif %}
 {% endif %}
