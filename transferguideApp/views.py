@@ -119,10 +119,11 @@ def course_requests(request):
 def course_request_detail(request, id):
     if not request.user.is_authenticated:
         return redirect('login')
-    course_request = get_object_or_404(CourseRequest, id=id)
+    course_request = CourseRequest.objects.get(id=id)
 
     if request.method == 'POST':
         course_request.status = request.POST['status']
+        course_request.course_equivalency = request.POST['course_equivalency']
         course_request.save()
         return redirect('course-requests')
 

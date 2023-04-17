@@ -33,15 +33,17 @@ class CourseRequest(models.Model):
         ('APPROVED', 'Approved'),
         ('DENIED', 'Denied'),
     )
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    course_equivalency = models.CharField(max_length=200, default="")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="NO USER") 
     
-    def save(self, *args, **kwargs):
-        if hasattr(self, 'user') and self.user.is_staff:
-            self.status = 'Approved'
-            super(CourseRequest, self).save(*args, **kwargs)
-        else: 
-            super(CourseRequest, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if hasattr(self, 'user') and self.user.is_staff:
+    #         if not self.pk:
+    #             self.status = ('APPROVED', 'Approved')
+    #             super(CourseRequest, self).save(*args, **kwargs)
+    #     else: 
+    #         super(CourseRequest, self).save(*args, **kwargs)
     
     # def save(self, *args, **kwargs):
     #     if not self.pk:

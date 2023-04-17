@@ -21,6 +21,19 @@
 
 }
 
+.PENDING {
+  color: orange;
+}
+
+.APPROVED {
+  color: green;
+}
+
+.DENIED {
+  color: red;
+}
+
+
 .course-request-table {
   width: 100%;
   margin: 0;
@@ -94,7 +107,13 @@
             <td>{{ course_request.course_subject }}</td>
             <td>{{ course_request.credits }}</td>
             <td>{{ course_request.transfer_institution }}</td>
-            <td>{{ course_request.status }}</td>
+            {% if course_request.status == "PENDING" %}
+              <td class="PENDING">{{ course_request.status }}</td>
+            {% elif course_request.status == "APPROVED" %}
+              <td class="APPROVED">{{ course_request.status }}</td>
+            {% elif course_request.status == "DENIED" %}
+              <td class="DENIED">{{ course_request.status }}</td>
+            {% endif %}
             <td>
               {% if user.is_staff %}
                 <a href="{% url 'course_request_detail' course_request.id %}" class="btn btn-sm btn-primary">Edit</a>
