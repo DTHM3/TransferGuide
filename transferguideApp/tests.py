@@ -8,8 +8,8 @@ class ClassSearchTest(TestCase):
     results = []
 
     def setUp(self):
-        self.user = User.objects.create_user(username='jdoe', password='jdoepass')
-        self.client.login(username='jdoe', password='jdoepass')
+        self.user = User.objects.create_user(username='test', password='test')
+        self.client.login(username='test', password='test')
 
     def test_search_success(self):
         response = self.client.get("/guide/search/")
