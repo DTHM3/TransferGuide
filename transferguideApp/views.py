@@ -140,3 +140,32 @@ def course_request_detail(request, id):
 # def course_request_detail(request, id):
 #     course_request = get_object_or_404(CourseRequest, id=id)
 #     return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})
+
+def course_equivalency(request):
+    institutions = set(CourseRequest.objects.values_list('transfer_institution', flat=True))
+    courses = CourseRequest.objects.all().order_by('transfer_institution')
+
+    if request.GET.get('transfer_institution'):
+        courses = courses.filter(transfer_institution=request.GET['transfer_institution'])
+
+    return render(request, 'courserequest/course_equivalency.html', {'courses': courses, 'institutions': institutions})
+
+
+# def course_equivalency(request):
+#     institution = request.GET.get('institution', '')
+#     if institution:
+#         courses = CourseRequest.objects.filter(transfer_institution=institution).order_by('transfer_institution')
+#     else:
+#         courses = CourseRequest.objects.order_by('transfer_institution')
+#     return render(request, 'courserequest/course_equivalency.html', {'courses': courses})
+    
+    # courses = CourseRequest.objects.order_by('transfer_institution')
+    # return render(request, 'course_equivalency.html', {'courses': courses})
+
+# def course_list_filtered(request):
+#     institution = request.GET.get('institution', '')
+#     if institution:
+#         courses = CourseRequest.objects.filter(transfer_institution=institution).order_by('transfer_institution')
+#     else:
+#         courses = CourseRequest.objects.order_by('transfer_institution')
+#     return render(request, 'course_list.html', {'courses': courses})
