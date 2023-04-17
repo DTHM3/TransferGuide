@@ -38,7 +38,7 @@ class CourseRequestForm(forms.ModelForm):
 
     def clean_course_subject(self):
         course_subject = self.cleaned_data.get('course_subject')
-        if len(course_subject) < 5:
+        if len(course_subject) < 3:
             raise forms.ValidationError('Please enter a valid course subject')
         return course_subject
 
