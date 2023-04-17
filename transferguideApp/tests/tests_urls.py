@@ -1,8 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 
-from transferguideApp.views import login, render_template, course_request, list_course_requests, course_request_detail, \
-    NewsView
+from transferguideApp.views import login, render_template, course_request, list_course_requests, course_request_detail, news_index
 
 
 # Everytime we do not need to interact with database
@@ -34,5 +33,5 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func, course_request_detail)
 
     def test_news_list_url(self):
-        url = reverse('news')
-        self.assertEquals(resolve(url).func.view_class, NewsView)
+        url = reverse('news_index')
+        self.assertEquals(resolve(url).func, news_index)

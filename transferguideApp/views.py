@@ -105,14 +105,22 @@ def course_equivalency(request):
 def login(request):
     return render(request, 'transferGuideApp/login.html')
 
-class NewsView(generic.ListView):
-    model = News
-    context_object_name = 'news_list'
-    template_name = 'transferguideApp/news.html'
+# class NewsView(generic.ListView):
+#     model = News
+#     context_object_name = 'news_list'
+#     template_name = 'transferguideApp/news.html'
     
-    def get_queryset(self):
-        # returns the latest news
-        return News.objects.all()
+#     def get_queryset(self):
+#         # returns the latest news
+#         return News.objects.all()
+
+def news_index(request):
+    news = News.objects.all()
+    return render(request, 'transferguideApp/news_index.html', {'news': news})
+
+def news_detail(request, title):
+    news = News.objects.get(title=title)
+    return render(request, 'transferguideApp/news_detail.html', {'news': news})
     
 
 # def course_request_list(request):
