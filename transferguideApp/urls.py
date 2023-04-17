@@ -18,8 +18,8 @@ urlpatterns = [
     path('search/', render_template, name = 'search'),
     path('news/', views.NewsView.as_view(), name='news'),
     path('course-request/', course_request, name='course-request'),
+    path('course-equivalency/', course_equivalency, name='course-equivalency'),
     path('course-requests/', list_course_requests, name='list_course_requests'),
     path('course-requests/<int:id>/', course_request_detail, name='course_request_detail'),
     path('course-equivalency/', course_equivalency, name='course_equivalency'),
-
 ]

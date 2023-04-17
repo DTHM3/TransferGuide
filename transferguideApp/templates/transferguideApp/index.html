@@ -27,6 +27,8 @@
         {% if user.is_authenticated %}
         <li class="nav-item"> <a class="nav-link" href='{% url 'course-request' %}'>Request</a></li>
         <li class="nav-item"> <a class="nav-link" href='{% url 'course_equivalency' %}'>Course Equivalency</a></li>
+        <li class="nav-item"> <a class="nav-link" href='{% url 'course-equivalency' %}'>Equivalency</a></li>
+
         <li class="nav-item"> <a class="nav-link" href="/logout">Logout</a></li>
         {% comment %} {% else %}
         <li class="nav-item"> <a class="nav-link" href="/login">Login</a></li> {% endcomment %}

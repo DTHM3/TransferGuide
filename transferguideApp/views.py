@@ -60,10 +60,10 @@ def render_template(request):
             url = keywordURL
         elif (search_type == "class-number"):
             url = numURL
-        print(url)
+        # print(url)
         response = requests.get(url)
         response = response.json()
-        print(response)
+        # print(response)
 
         for item in response:
             myclass = UVAClass()
@@ -73,6 +73,7 @@ def render_template(request):
             myclass.instructors = item['instructors']
             myclass.units = item['units']
             classes.append(myclass)
+
 
     return render(request, 'transferguideApp/search.html', {'classes': classes})
 
@@ -95,6 +96,10 @@ def course_request(request):
     else:
         form = CourseRequestForm()
     return render(request, 'courserequest/courseRequest.html', {'form': form})
+
+
+def course_equivalency(request):
+    return render(request, 'transferguideApp/courseEquivalency.html')
 
 
 def login(request):
