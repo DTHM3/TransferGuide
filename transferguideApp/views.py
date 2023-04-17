@@ -86,6 +86,11 @@ class NewsView(generic.ListView):
     model = News
     context_object_name = 'news_list'
     template_name = 'transferguideApp/news.html'
+    
+class ViewCourseRequestView(generic.ListView):
+    model = News
+    context_object_name = 'course_request_list'
+    template_name = 'transferguideApp/viewcourserquest.html'
 
     def get_queryset(self):
         # returns the latest news
