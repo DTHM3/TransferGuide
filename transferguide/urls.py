@@ -23,27 +23,17 @@ from django.urls import path, include
 
 from django.views.generic import TemplateView
 
+from transferguideApp.views import login
+
 # from transferguide.views import index
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name= "transferguideApp/home.html")),
     path("admin/", admin.site.urls),
 
+    path('login/', login, name='login'),
     path('guide/', include('transferguideApp.urls')),
     
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
 ]
-
-
-
-    # path("admin-account-login/",TemplateView.as_view(template_name="admin.html")),
-
-    # # path('', TemplateView.as_view(template_name="index.html")),
-    # path('accounts/', include('allauth.urls')),
-    # path('logout', LogoutView.as_view()),
-
-    # path('home/', views.say_hello),
-
-    # path('', render_template), # This is the path for search page
-

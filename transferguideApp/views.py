@@ -45,9 +45,9 @@ def render_template(request):
         url = ""
         subjectURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&subject={search_value.upper()}&page=1"
         instructorURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&instructor_name={search_value}"
-        if(search_type == "subject"):
+        if (search_type == "subject"):
             url = subjectURL
-        elif(search_type == "professor"):
+        elif (search_type == "professor"):
             url = instructorURL
         print(url)
         response = requests.get(url)
@@ -66,7 +66,6 @@ def render_template(request):
     return render(request, 'transferguideApp/search.html', {'classes': classes})
 
 
-
 def course_request(request):
     if request.method == 'POST':
         form = CourseRequestForm(request.POST)
@@ -74,13 +73,16 @@ def course_request(request):
             form.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
-            return redirect('news') #To change after
+            return redirect('news')  # To change after
         else:
             return render(request, 'courserequest/courseRequest.html', {'form': form})
     else:
         form = CourseRequestForm()
-        return render(request, 'courserequest/courseRequest.html', {'form': form})
+    return render(request, 'courserequest/courseRequest.html', {'form': form})
 
+
+def login(request):
+    return render(request, 'transferGuideApp/login.html')
 
 class NewsView(generic.ListView):
     model = News

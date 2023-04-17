@@ -12,7 +12,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 from transferguideApp import views
-from transferguideApp.views import render_template, course_request
+from transferguideApp.views import render_template, course_request, login
 
 urlpatterns = [
 #     # Route, View (Function that returns HTTP Response) -> Returns HTTP Response
