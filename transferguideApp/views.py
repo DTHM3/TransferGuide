@@ -76,7 +76,7 @@ def course_request(request):
             form.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
-            return redirect('news')  # To change after
+            return redirect('home')  # To change after
         else:
             return render(request, 'courserequest/courseRequest.html', {'form': form})
     else:
