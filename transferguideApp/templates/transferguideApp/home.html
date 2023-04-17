@@ -63,9 +63,8 @@
     </div>
     {% else %}
     <div class="home-page-button d-flex flex-column">
-        <button type="button" class="btn btn-outline-secondary btn-lg">Submit Course for Equivalency</button>
+        <button type="button"  onclick="location.href='{% url 'course-request' %}'" class="btn btn-outline-secondary btn-lg">Submit Course for Equivalency</button>
         <button type="button" onclick="location.href='{% url 'search' %}'" class="btn btn-outline-secondary btn-lg">Search For UVA Courses</button>
-
     </div>
     {% endif %}
 {% endif %}
