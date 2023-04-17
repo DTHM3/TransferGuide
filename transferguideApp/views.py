@@ -109,9 +109,9 @@ def course_request_list(request):
 
 def course_request_list(request):
     if request.user.is_staff:
-        course_requests = CourseRequest.objects.all()
+        course_requests = CourseRequest.objects.all().order_by('id')
     else:
-        course_requests = CourseRequest.objects.filter(user=request.user)
+        course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
 
 def course_request_detail(request, id):

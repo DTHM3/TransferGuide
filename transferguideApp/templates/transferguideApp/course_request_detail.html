@@ -20,6 +20,70 @@
     padding-top: 40vh;
 
 }
+
+/* Set a max width for the content area */
+.course-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style the course title */
+.course-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style the course fields */
+.course-field {
+  margin-bottom: 10px;
+}
+
+.course-field label {
+  display: inline-block;
+  font-weight: bold;
+  width: 150px;
+}
+
+/* Style the edit button */
+.edit-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-button:hover {
+  background-color: #3e8e41;
+}
+
+/* Style the status field */
+.status {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pending {
+  color: orange;
+}
+
+.approved {
+  color: green;
+}
+
+.denied {
+  color: red;
+}
+
+
 </style>
 
 {% if not user.is_authenticated %}
@@ -30,8 +94,7 @@
 </div>
 {% else %}
     {% if user.is_staff %}
-        <h1>{{ user }}</h1>
-        <h1>{{ course_request.title }}</h1>
+        {% comment %} <h1>{{ course_request.title }}</h1>
         <p>Course Subject: {{ course_request.course_subject }}</p>
         <p>Credits: {{ course_request.credits }}</p>
         <p>Transfer Institution: {{ course_request.transfer_institution }}</p>
@@ -46,7 +109,44 @@
             </select>
             <br>
             <button type="submit">Save</button>
-        </form>
+        </form> {% endcomment %}
+        <div class="course-details">
+            <h1 class="course-title">{{ course_request.title }}</h1>
+            <div class="course-field">
+              <label>Course Subject:</label> {{ course_request.course_subject }}
+            </div>
+            <div class="course-field">
+              <label>Credits:</label> {{ course_request.credits }}
+            </div>
+            <div class="course-field">
+              <label>Transfer Institution:</label> {{ course_request.transfer_institution }}
+            </div>
+            <div class="course-field">
+              <label>URL:</label> <a href="{{ course_request.url }}" target="_blank">{{ course_request.url }}</a>
+            </div>
+            <div class="status">
+              <label>Status:</label>
+              {% if course_request.status == "Pending" %}
+                <span class="pending">{{ course_request.status }}</span>
+              {% elif course_request.status == "Approved" %}
+                <span class="approved">{{ course_request.status }}</span>
+              {% elif course_request.status == "Denied" %}
+                <span class="denied">{{ course_request.status }}</span>
+              {% endif %}
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                <option value="Pending" {% if course_request.status == "Pending" %}selected{% endif %}>Pending</option>
+                <option value="Approved" {% if course_request.status == "Approved" %}selected{% endif %}>Approved</option>
+                <option value="Denied" {% if course_request.status == "Denied" %}selected{% endif %}>Denied</option>
+                </select>
+                <br>
+                <button type="submit">Save</button>
+            </form>
+           
+          </div>
     {% else %}
         {% if user == course_request.user %}
             <h1>{{ course_request.title }}</h1>
