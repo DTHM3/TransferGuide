@@ -3,10 +3,11 @@ from django.forms import ModelForm
 from .models import CourseRequest
 
 
-class CourseRequestForm(ModelForm):
+class CourseRequestForm(forms.ModelForm):
     class Meta:
         model = CourseRequest
         fields = ['title', 'course_subject', 'credits', 'transfer_institution', 'url']
+        exclude = ['status']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
@@ -15,3 +16,4 @@ class CourseRequestForm(ModelForm):
             'transfer_institution': forms.TextInput(attrs={'class': 'form-control'}),
             'url': forms.TextInput(attrs={'class': 'form-control'}),
         }
+

@@ -1,0 +1,15 @@
+{% extends 'transferguideApp/index.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+   {% if user.is_authenticated %}
+        <p>Welcome, You are a staff logged in as {{ user.username }}</p>
+    {%else %}
+    <a href="{% provider_login_url 'google' %}">Login With Google</a>
+    {% endif %}
+{% endblock %}
+
+
+
+

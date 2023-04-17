@@ -6,14 +6,23 @@
   <div class="row">
     <div class="col-md-6">
       <h1>Course Request</h1>
-      <p>Fill out the form below to request a course to be evaluated for transfer credit and to the transfer guide.</p>
     </div>
-      <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-primary">Submit</button>
+
+      {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <p>Please add a course equivalency!</p>
+          {% else %}
+           <p>Fill out the form below to request a course to be evaluated for transfer credit and to the transfer guide.</p>
+          {% endif %}
+        <form action="/guide/course-request/" method="POST">
+            {% csrf_token %}
+            {% csrf_token %}
+            {{ form }}
+        <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-  </div>
+      {% else %}
+          <p>Please Login to submit a course equivalency request!</p>
+      {% endif %}
 </div>
 {% endblock %}
 
