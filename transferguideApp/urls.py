@@ -18,4 +18,5 @@ urlpatterns = [
     path('search/', render_template, name = 'search'),
     path('news/', views.NewsView.as_view(), name='news'),
     path('course-request/', course_request, name='course-request'),
+    # path('view-course-requests/', view_course_request, name='view-course-request'),
 ]
