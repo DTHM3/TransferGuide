@@ -49,10 +49,13 @@ def render_template(request):
         url = ""
         subjectURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&subject={search_value.upper()}&page=1"
         instructorURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&instructor_name={search_value}"
+        keywordURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&keyword={search_value}"
         if (search_type == "subject"):
             url = subjectURL
         elif (search_type == "professor"):
             url = instructorURL
+        elif (search_type == "keyword"):
+            url = keywordURL
         print(url)
         response = requests.get(url)
         response = response.json()
@@ -116,6 +119,7 @@ def list_course_requests(request):
         course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
     return render(request, 'courserequest/list_course_requests.html', {'course_requests': course_requests})
 
+ 
 def course_request_detail(request, id):
     if not request.user.is_authenticated:
         return redirect('login')

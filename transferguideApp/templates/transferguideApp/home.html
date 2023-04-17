@@ -46,8 +46,8 @@
 
 {% if not user.is_authenticated %}
 <div class="login-container">
-    <div class="login-button" >
-    <button type="button" class="btn btn-warning" onclick="location.href='{% provider_login_url 'google' %}'">Login with Google</button>
+    <div class="login-button">
+      <button type="button" class="btn btn-warning" onclick="location.href='{% provider_login_url 'google' %}'">Login with Google</button>
     </div>
 </div>
 {% else %}
@@ -56,10 +56,9 @@
 </div>
     {% if user.is_staff %}
     <div class="home-page-button d-flex flex-column">
-        <button type="button"  onclick="location.href='{% url 'list_course_requests' %}'" class="btn btn-outline-secondary btn-lg">Review Course Request Equivalencies</button>
+        <button type="button" onclick="location.href='{% url 'list_course_requests' %}'"  class="btn btn-outline-secondary btn-lg">Review Course Request Equivalencies</button>
         <button type="button" onclick="location.href='{% url 'course-request' %}'"  class="btn btn-outline-secondary btn-lg">Add Course Equivalency</button>
         <button type="button" onclick="location.href='{% url 'search' %}'" class="btn btn-outline-secondary btn-lg">Search For UVA Courses</button>
-
     </div>
     {% else %}
     <div class="home-page-button d-flex flex-column">
