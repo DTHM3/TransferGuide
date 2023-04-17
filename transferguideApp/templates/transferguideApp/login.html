@@ -3,12 +3,35 @@
 {% load socialaccount %}
 
 {% block content %}
-   {% if user.is_authenticated %}
+
+<style>
+.login-button {
+    width: 900%;
+    max-width: 100%;
+    padding-right: 500px;
+    padding-left: 500px;
+    margin-right: auto;
+    margin-left: auto;
+}
+</style>
+
+
+<div class="login-button">
+    {% if user.is_authenticated %}
         <p>Welcome, You are a staff logged in as {{ user.username }}</p>
     {%else %}
-    <a href="{% provider_login_url 'google' %}">Login With Google</a>
+    <button type="button" class="btn btn-primary btn-lg" onclick="location.href='{% provider_login_url 'google' %}'">Login with Google</button>
+
+<!--    <button type="button" class="btn btn-primary btn-lg" onclick="location.href='{% provider_login_url 'google' %}'" >Large button</button>-->
+<!--    <button class="google-login-btn" href="{% provider_login_url 'google' %}">Login with Google</button>-->
+
+<!--    <a href="{% provider_login_url 'google' %}">Login With Google</a>-->
     {% endif %}
+</div>
 {% endblock %}
+
+
+
 
 
 
