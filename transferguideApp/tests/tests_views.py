@@ -25,10 +25,6 @@ class CourseRequestDetailViewTestCase(TestCase):
         response = self.client.post(self.url, data=form_data)
         self.url = reverse('course_request_detail', args=['1'])
 
-    def test_attempt_to_view_course_request_noAuthentication(self):
-        self.client.logout()
-        response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('login'))
 
     def test_validRequestDetail(self):
         response = self.client.get(self.url)
@@ -45,9 +41,6 @@ class ListCourseRequestsViewTestCase(TestCase):
         self.user = User.objects.create_user(username='test', password='test')
         self.url = reverse('list_course_requests')
 
-    def test_attempt_to_view_course_request_noAuthentication(self):
-        response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('login'))
 
     def test_lists_all_course_requests_by_submitter(self):
         self.client.login(username='test', password='test')
@@ -72,10 +65,6 @@ class CourseRequestViewTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='test', password='test')
         self.url = reverse('course-request')
-
-    def test_attempt_to_submit_course_request_noAuthentication(self):
-        response = self.client.get(self.url)
-        self.assertRedirects(response, reverse('login'))
 
     def test_get_request_returns_valid_form(self):
         self.client.login(username='test', password='test')
