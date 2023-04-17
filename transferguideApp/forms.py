@@ -54,7 +54,7 @@ class CourseRequestForm(forms.ModelForm):
     class Meta:
         model = CourseRequest
         fields = ['title', 'course_subject', 'credits', 'transfer_institution', 'url']
-        exclude = ['status']
+        exclude = ['status', 'user']
 
 
 

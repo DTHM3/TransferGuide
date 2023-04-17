@@ -75,7 +75,9 @@ def course_request(request):
     if request.method == 'POST':
         form = CourseRequestForm(request.POST)
         if form.is_valid():
-            form.save()
+            course_request = form.save(commit=False)
+            course_request.user = request.user
+            course_request.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
             return redirect('home')  # To change after
