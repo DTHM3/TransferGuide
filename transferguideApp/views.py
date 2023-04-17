@@ -67,6 +67,9 @@ def render_template(request):
 
 
 def course_request(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     if request.method == 'POST':
         form = CourseRequestForm(request.POST)
         if form.is_valid():
