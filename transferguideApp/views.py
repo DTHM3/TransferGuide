@@ -45,10 +45,13 @@ def render_template(request):
         url = ""
         subjectURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&subject={search_value.upper()}&page=1"
         instructorURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&instructor_name={search_value}"
+        keywordURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&keyword={search_value}"
         if (search_type == "subject"):
             url = subjectURL
         elif (search_type == "professor"):
             url = instructorURL
+        elif (search_type == "keyword"):
+            url = keywordURL
         print(url)
         response = requests.get(url)
         response = response.json()
@@ -67,13 +70,18 @@ def render_template(request):
 
 
 def course_request(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
     if request.method == 'POST':
         form = CourseRequestForm(request.POST)
         if form.is_valid():
-            form.save()
+            course_request = form.save(commit=False)
+            course_request.user = request.user
+            course_request.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
-            return redirect('news')  # To change after
+            return redirect('course-requests')  # To change after
         else:
             return render(request, 'courserequest/courseRequest.html', {'form': form})
     else:
@@ -88,7 +96,37 @@ class NewsView(generic.ListView):
     model = News
     context_object_name = 'news_list'
     template_name = 'transferguideApp/news.html'
-
+    
     def get_queryset(self):
         # returns the latest news
         return News.objects.all()
+    
+
+# def course_request_list(request):
+#     course_requests = CourseRequest.objects.all()
+#     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
+
+def course_requests(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if request.user.is_staff:
+        course_requests = CourseRequest.objects.all().order_by('id')
+    else:
+        course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
+    return render(request, 'courserequest/course-requests.html', {'course_requests': course_requests})
+
+def course_request_detail(request, id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    course_request = get_object_or_404(CourseRequest, id=id)
+
+    if request.method == 'POST':
+        course_request.status = request.POST['status']
+        course_request.save()
+        return redirect('course-requests')
+
+    return render(request, 'courserequest/course_request_detail.html', {'course_request': course_request})
+
+# def course_request_detail(request, id):
+#     course_request = get_object_or_404(CourseRequest, id=id)
+#     return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})
