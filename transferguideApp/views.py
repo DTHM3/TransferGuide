@@ -112,7 +112,7 @@ def course_requests(request):
         course_requests = CourseRequest.objects.all().order_by('id')
     else:
         course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
-    return render(request, 'transferGuideApp/course-requests.html', {'course_requests': course_requests})
+    return render(request, 'courserequest/course-requests.html', {'course_requests': course_requests})
 
 def course_request_detail(request, id):
     course_request = get_object_or_404(CourseRequest, id=id)
@@ -122,7 +122,7 @@ def course_request_detail(request, id):
         course_request.save()
         return redirect('course-requests')
 
-    return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})
+    return render(request, 'courserequest/course_request_detail.html', {'course_request': course_request})
 
 # def course_request_detail(request, id):
 #     course_request = get_object_or_404(CourseRequest, id=id)
