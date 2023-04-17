@@ -1,0 +1,109 @@
+{% extends 'transferguideApp/index.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+{% comment %} <style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      
+      thead {
+        background-color: #f5f5f5;
+      }
+      
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      th {
+        font-weight: bold;
+      }
+      
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+</style> {% endcomment %}
+
+<style>
+    .course-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    
+    .course-table th,
+    .course-table td {
+      text-align: left;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .course-table th {
+      font-weight: bold;
+      background-color: #f5f5f5;
+    }
+    
+    .course-table tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    @media screen and (max-width: 600px) {
+      .course-table th,
+      .course-table td {
+        display: block;
+        width: 100%;
+        text-align: right;
+      }
+    
+      .course-table th {
+        text-align: right;
+      }
+    }
+</style>
+
+{% if not user.is_authenticated %}
+{% else %}
+    <h1>Course Equivalency</h1>
+    <form method="GET">
+    <label for="transfer_institution">Filter by Transfer Institution:</label>
+    <select id="transfer_institution" name="transfer_institution">
+        <option value="">All</option>
+        {% for institution in institutions %}
+        <option value="{{ institution }}">{{ institution }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+    </form>
+    <table class="course-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Course Subject</th>
+                <th>Transfer Institution</th>
+                <th>Credits</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td>{{ course.title }}</td>
+                <td>{{ course.course_subject }}</td>
+                <td>{{ course.transfer_institution }}</td>
+                <td>{{ course.credits }}</td>
+                <td>{{ course.url }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if user.is_staff %}
+    {% else %}
+    {% endif %}
+{% endif %}
+{% endblock %}
