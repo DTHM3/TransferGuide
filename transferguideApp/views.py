@@ -50,12 +50,16 @@ def render_template(request):
         subjectURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&subject={search_value.upper()}&page=1"
         instructorURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&instructor_name={search_value}"
         keywordURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&keyword={search_value}"
+        numURL = f"https://sisuva.admin.virginia.edu/psc/ihprd/UVSS/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=UVA01&term=1228&page=1&class_nbr={search_value}"
+
         if (search_type == "subject"):
             url = subjectURL
         elif (search_type == "professor"):
             url = instructorURL
         elif (search_type == "keyword"):
             url = keywordURL
+        elif (search_type == "class-number"):
+            url = numURL
         print(url)
         response = requests.get(url)
         response = response.json()
