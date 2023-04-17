@@ -19,10 +19,16 @@ class News(models.Model):
 
 
 class CourseRequest(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     course_subject = models.CharField(max_length=200)
     credits = models.IntegerField()
     transfer_institution = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
-    status = models.CharField(max_length=200, default="Pending")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default="NO USER")
+    STATUS_CHOICES = (
+        ('PENDING', 'Pending'),
+        ('APPROVED', 'Approved'),
+        ('DENIED', 'Denied'),
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="NO USER") 

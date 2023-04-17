@@ -1,0 +1,37 @@
+{% extends 'transferguideApp/index.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block content %}
+<style>
+.login-container {
+    background-image: url("/static/images/uva_project.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.login-button {
+    width: 20%;
+    max-width: 90%;
+    margin:  auto;
+    position: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 40vh;
+
+}
+</style>
+
+{% if not user.is_authenticated %}
+<div class="login-container">
+    <div class="login-button" >
+    <button type="button" class="btn btn-warning" onclick="location.href='{% provider_login_url 'google' %}'">Login with Google</button>
+    </div>
+</div>
+{% else %}
+    <div> View Course Requests...</div>
+    {% if user.is_staff %}
+    {% else %}
+    {% endif %}
+{% endif %}
+{% endblock %}
