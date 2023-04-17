@@ -82,7 +82,7 @@ def course_request(request):
             course_request.save()
             # user = request.user to add after we add authentication
             # User submits response now redirect them to home page
-            return redirect('home')  # To change after
+            return redirect('course_request_list')  # To change after
         else:
             return render(request, 'courserequest/courseRequest.html', {'form': form})
     else:
@@ -103,9 +103,9 @@ class NewsView(generic.ListView):
         return News.objects.all()
     
 
-def course_request_list(request):
-    course_requests = CourseRequest.objects.all()
-    return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
+# def course_request_list(request):
+#     course_requests = CourseRequest.objects.all()
+#     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
 
 def course_request_list(request):
     if request.user.is_staff:

@@ -149,12 +149,31 @@
           </div>
     {% else %}
         {% if user == course_request.user %}
-            <h1>{{ course_request.title }}</h1>
-            <p>Course Subject: {{ course_request.course_subject }}</p>
-            <p>Credits: {{ course_request.credits }}</p>
-            <p>Transfer Institution: {{ course_request.transfer_institution }}</p>
-            <p>URL: <a href="{{ course_request.url }}">{{ course_request.url }}</a></p>
-            <p>Status: {{ course_request.status }}</p>
+            <div class="course-details">
+                <h1 class="course-title">{{ course_request.title }}</h1>
+                <div class="course-field">
+                <label>Course Subject:</label> {{ course_request.course_subject }}
+                </div>
+                <div class="course-field">
+                <label>Credits:</label> {{ course_request.credits }}
+                </div>
+                <div class="course-field">
+                <label>Transfer Institution:</label> {{ course_request.transfer_institution }}
+                </div>
+                <div class="course-field">
+                <label>URL:</label> <a href="{{ course_request.url }}" target="_blank">{{ course_request.url }}</a>
+                </div>
+                <div class="status">
+                <label>Status:</label>
+                {% if course_request.status == "Pending" %}
+                    <span class="pending">{{ course_request.status }}</span>
+                {% elif course_request.status == "Approved" %}
+                    <span class="approved">{{ course_request.status }}</span>
+                {% elif course_request.status == "Denied" %}
+                    <span class="denied">{{ course_request.status }}</span>
+                {% endif %}
+                </div>
+            </div>
             {% comment %} <p>Submitted By: {{ course_request.user.username }}</p> {% endcomment %}
         {% else %}
             <h1>You Can't View This Course Request</h1>
