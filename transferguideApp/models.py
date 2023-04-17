@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
+
+curentUser = get_user_model()
 
 # Create your models here.
 
@@ -30,5 +33,22 @@ class CourseRequest(models.Model):
         ('APPROVED', 'Approved'),
         ('DENIED', 'Denied'),
     )
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="NO USER") 
+    
+    def save(self, *args, **kwargs):
+        if hasattr(self, 'user') and self.user.is_staff:
+            self.status = 'Approved'
+            super(CourseRequest, self).save(*args, **kwargs)
+        else: 
+            super(CourseRequest, self).save(*args, **kwargs)
+    
+    # def save(self, *args, **kwargs):
+    #     if not self.pk:
+    #         print(User.is_staff)
+    #         if User.is_staff:
+    #             self.status = 'Approved'
+    #         super(CourseRequest, self).save(*args, **kwargs)
+    #     else: 
+    #         super(CourseRequest, self).save(*args, **kwargs)
+
