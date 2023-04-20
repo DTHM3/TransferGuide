@@ -103,7 +103,7 @@ def course_equivalency(request):
 
 
 def login(request):
-    return render(request, 'transferGuideApp/login.html')
+    return render(request, 'transferguideApp/login.html')
 
 # class NewsView(generic.ListView):
 #     model = News
