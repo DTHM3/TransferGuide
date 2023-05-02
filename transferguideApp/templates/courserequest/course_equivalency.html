@@ -93,14 +93,18 @@
         </thead>
         <tbody>
             {% for course in courses %}
+            {% if course.status == "APPROVED"  %}
             <tr>
                 <td>{{ course.title }}</td>
                  <td>{{ course.course_equivalency }}</td>
                 <td>{{ course.course_subject }}</td>
                 <td>{{ course.transfer_institution }}</td>
                 <td>{{ course.credits }}</td>
-                <td>{{ course.url }}</td>
+                <td>
+                  <a href="{{ course.url }}">{{ course.url }}</a>
+                </td>
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>
