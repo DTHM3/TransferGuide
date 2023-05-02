@@ -18,10 +18,10 @@
     {% endif %}
 </div> {% endcomment %}
 
-    <h1>News</h1>
-    <ul>
+    <h1 class="m-3">News</h1>
     {% for n in news %}
-        <li><a href="{% url 'news_detail' n.title %}">{{ n.title }}</a></li>
+        <div class="m-3 font-weight-bold">
+            <a role="button" class="btn btn-light" href="{% url 'news_detail' n.title %}" style="font-weight: bolder;">{{ n.title }}</a>
+        </div>
     {% endfor %}
-    </ul>
 {% endblock %}
