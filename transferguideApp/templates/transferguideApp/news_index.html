@@ -1,0 +1,27 @@
+{% extends 'transferguideApp/index.html' %}
+
+{% load static %}
+{% block content %}
+{% comment %} <div>
+    <h1>News</h1>
+</div>
+
+<div class="container">
+    {% if news_list %}
+        <ul class="list-group">
+        {% for news in news_list %}
+            <li class="list-group-item">{{news.title}}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No News are available.</p>
+    {% endif %}
+</div> {% endcomment %}
+
+    <h1>News</h1>
+    <ul>
+    {% for n in news %}
+        <li><a href="{% url 'news_detail' n.title %}">{{ n.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

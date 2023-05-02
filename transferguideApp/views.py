@@ -1,21 +1,17 @@
-from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect
 
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
-from django.views.generic import CreateView
+from django.shortcuts import render
 
 from transferguideApp.models import UVAClass
 import requests
 
-import requests
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse 
 from django.shortcuts import render
 
 from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
 from .models import CourseRequest
-from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -103,22 +99,26 @@ def course_equivalency(request):
 
 
 def login(request):
-    return render(request, 'transferGuideApp/login.html')
+    return render(request, 'transferguideApp/login.html')
 
-class NewsView(generic.ListView):
-    model = News
-    context_object_name = 'news_list'
-    template_name = 'transferguideApp/news.html'
+# class NewsView(generic.ListView):
+#     model = News
+#     context_object_name = 'news_list'
+#     template_name = 'transferguideApp/news.html'
     
-    def get_queryset(self):
-        # returns the latest news
-        return News.objects.all()
-    
+#     def get_queryset(self):
+#         # returns the latest news
+#         return News.objects.all()
 
-# def course_request_list(request):
-#     course_requests = CourseRequest.objects.all()
-#     return render(request, 'transferGuideApp/course_request_list.html', {'course_requests': course_requests})
+def news_index(request):
+    news = News.objects.all()
+    return render(request, 'transferguideApp/news_index.html', {'news': news})
 
+def news_detail(request, title):
+    news = News.objects.get(title=title)
+    return render(request, 'transferguideApp/news_detail.html', {'news': news})
+
+# SOURCE: https://stackoverflow.com/questions/15636527/django-model-object-filter
 def list_course_requests(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -128,7 +128,7 @@ def list_course_requests(request):
         course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
     return render(request, 'courserequest/list_course_requests.html', {'course_requests': course_requests})
 
- 
+# SOURCE: https://stackoverflow.com/questions/19132210/what-does-request-method-post-mean-in-django 
 def course_request_detail(request, id):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -142,11 +142,10 @@ def course_request_detail(request, id):
 
     return render(request, 'courserequest/course_request_detail.html', {'course_request': course_request})
 
-# def course_request_detail(request, id):
-#     course_request = get_object_or_404(CourseRequest, id=id)
-#     return render(request, 'transferGuideApp/course_request_detail.html', {'course_request': course_request})
-
+# SOURCE: https://stackoverflow.com/questions/37205793/django-values-list-vs-values
 def course_equivalency(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     institutions = set(CourseRequest.objects.values_list('transfer_institution', flat=True))
     courses = CourseRequest.objects.all().order_by('transfer_institution')
 
@@ -154,23 +153,3 @@ def course_equivalency(request):
         courses = courses.filter(transfer_institution=request.GET['transfer_institution'])
 
     return render(request, 'courserequest/course_equivalency.html', {'courses': courses, 'institutions': institutions})
-
-
-# def course_equivalency(request):
-#     institution = request.GET.get('institution', '')
-#     if institution:
-#         courses = CourseRequest.objects.filter(transfer_institution=institution).order_by('transfer_institution')
-#     else:
-#         courses = CourseRequest.objects.order_by('transfer_institution')
-#     return render(request, 'courserequest/course_equivalency.html', {'courses': courses})
-    
-    # courses = CourseRequest.objects.order_by('transfer_institution')
-    # return render(request, 'course_equivalency.html', {'courses': courses})
-
-# def course_list_filtered(request):
-#     institution = request.GET.get('institution', '')
-#     if institution:
-#         courses = CourseRequest.objects.filter(transfer_institution=institution).order_by('transfer_institution')
-#     else:
-#         courses = CourseRequest.objects.order_by('transfer_institution')
-#     return render(request, 'course_list.html', {'courses': courses})
