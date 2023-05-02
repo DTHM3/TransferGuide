@@ -1,21 +1,17 @@
-from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect
 
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
-from django.views.generic import CreateView
+from django.shortcuts import render
 
 from transferguideApp.models import UVAClass
 import requests
 
-import requests
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse 
 from django.shortcuts import render
 
 from .forms import CourseRequestForm
 from transferguideApp.models import UVAClass, News
 from .models import CourseRequest
-from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -122,7 +118,7 @@ def news_detail(request, title):
     news = News.objects.get(title=title)
     return render(request, 'transferguideApp/news_detail.html', {'news': news})
 
-
+# SOURCE: https://stackoverflow.com/questions/15636527/django-model-object-filter
 def list_course_requests(request):
     if not request.user.is_authenticated:
         return redirect('login')
