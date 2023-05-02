@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
 
-
-curentUser = get_user_model()
 
 # Create your models here.
 
@@ -20,6 +17,9 @@ class News(models.Model):
     text = models.CharField(max_length=200)
     date = models.DateTimeField('date published')
 
+# SOURCES: 
+# https://stackoverflow.com/questions/18676156/how-to-properly-use-the-choices-field-option-in-django
+# https://www.scaler.com/topics/django/Django-foreign-key/
 
 class CourseRequest(models.Model):
     id = models.AutoField(primary_key=True)
@@ -36,21 +36,4 @@ class CourseRequest(models.Model):
     course_equivalency = models.CharField(max_length=200, default="")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="NO USER") 
-    
-    # def save(self, *args, **kwargs):
-    #     if hasattr(self, 'user') and self.user.is_staff:
-    #         if not self.pk:
-    #             self.status = ('APPROVED', 'Approved')
-    #             super(CourseRequest, self).save(*args, **kwargs)
-    #     else: 
-    #         super(CourseRequest, self).save(*args, **kwargs)
-    
-    # def save(self, *args, **kwargs):
-    #     if not self.pk:
-    #         print(User.is_staff)
-    #         if User.is_staff:
-    #             self.status = 'Approved'
-    #         super(CourseRequest, self).save(*args, **kwargs)
-    #     else: 
-    #         super(CourseRequest, self).save(*args, **kwargs)
 

@@ -14,6 +14,7 @@ from django.views.generic import TemplateView
 from transferguideApp import views
 from transferguideApp.views import render_template, course_request, login, list_course_requests, course_request_detail, course_equivalency, news_index, news_detail
 
+# SOURCE: https://www.youtube.com/watch?v=B40bteAMM_M&list=PLCC34OHNcOtr025c1kHSPrnP18YPB-NFi
 urlpatterns = [
     path('search/', render_template, name = 'search'),
     path('news/', news_index, name='news_index'),
