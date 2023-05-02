@@ -121,7 +121,7 @@ def news_index(request):
 def news_detail(request, title):
     news = News.objects.get(title=title)
     return render(request, 'transferguideApp/news_detail.html', {'news': news})
-    
+
 
 def list_course_requests(request):
     if not request.user.is_authenticated:
@@ -132,7 +132,7 @@ def list_course_requests(request):
         course_requests = CourseRequest.objects.filter(user=request.user).order_by('id')
     return render(request, 'courserequest/list_course_requests.html', {'course_requests': course_requests})
 
- 
+# SOURCE: https://stackoverflow.com/questions/19132210/what-does-request-method-post-mean-in-django 
 def course_request_detail(request, id):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -146,6 +146,7 @@ def course_request_detail(request, id):
 
     return render(request, 'courserequest/course_request_detail.html', {'course_request': course_request})
 
+# SOURCE: https://stackoverflow.com/questions/37205793/django-values-list-vs-values
 def course_equivalency(request):
     if not request.user.is_authenticated:
         return redirect('login')
