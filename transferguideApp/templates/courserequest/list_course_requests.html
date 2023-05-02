@@ -5,9 +5,9 @@
 {% block content %}
 
 {% comment %} 
-Souces: 
-https://www.emailonacid.com/blog/article/email-development/emailology_media_queries_demystified_min-width_and_max-width/
-
+SOURCES:
+  https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l
+  https://www.emailonacid.com/blog/article/email-development/emailology_media_queries_demystified_min-width_and_max-width/
 {% endcomment %}
 <style>
 .login-container {
@@ -29,14 +29,17 @@ https://www.emailonacid.com/blog/article/email-development/emailology_media_quer
 
 .PENDING {
   color: orange;
+  font-weight: bold;
 }
 
 .APPROVED {
   color: green;
+  font-weight: bold;
 }
 
 .DENIED {
   color: red;
+  font-weight: bold;
 }
 
 
@@ -79,18 +82,6 @@ https://www.emailonacid.com/blog/article/email-development/emailology_media_quer
 
 {% if not user.is_authenticated %}
 {% else %}
-    {% comment %} <h1>Course Requests</h1>
-    <ul>
-    {% for course_request in course_requests %}
-        <li>
-        <a href="{% url 'course_request_detail' id=course_request.id %}">
-            {{ course_request.title }} ({{ course_request.status }})
-        </a>
-        </li>
-    {% empty %}
-        <li>No course requests found.</li>
-    {% endfor %}
-    </ul> {% endcomment %}
 
     <h1>My Course Requests</h1>
     <table class="table course-request-table">
@@ -124,7 +115,7 @@ https://www.emailonacid.com/blog/article/email-development/emailology_media_quer
               {% if user.is_staff %}
                 <a href="{% url 'course_request_detail' course_request.id %}" class="btn btn-sm btn-primary">Edit</a>
               {% else %}
-                <a href="{% url 'course_request_detail' course_request.id %}" class="btn btn-sm btn-primary">View</a>
+                <a href="{% url 'course_request_detail' course_request.id %}" class="btn btn-sm btn-secondary">View</a>
               {% endif %}
             </td>
           </tr>

@@ -148,6 +148,8 @@ def course_request_detail(request, id):
 
 # SOURCE: https://stackoverflow.com/questions/37205793/django-values-list-vs-values
 def course_equivalency(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     institutions = set(CourseRequest.objects.values_list('transfer_institution', flat=True))
     courses = CourseRequest.objects.all().order_by('transfer_institution')
 
