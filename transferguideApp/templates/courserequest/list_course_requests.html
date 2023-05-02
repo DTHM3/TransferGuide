@@ -7,77 +7,42 @@
 {% comment %} 
 SOURCES:
   https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l
-  https://www.emailonacid.com/blog/article/email-development/emailology_media_queries_demystified_min-width_and_max-width/
 {% endcomment %}
 <style>
-.login-container {
-    background-image: url("/static/images/uva_project.png");
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-}
-.login-button {
-    width: 20%;
-    max-width: 90%;
-    margin:  auto;
-    position: center;
-    display: flex;
-    justify-content: center;
-    padding-top: 40vh;
+  .PENDING {
+    color: orange;
+    font-weight: bold;
+  }
 
-}
+  .APPROVED {
+    color: green;
+    font-weight: bold;
+  }
 
-.PENDING {
-  color: orange;
-  font-weight: bold;
-}
-
-.APPROVED {
-  color: green;
-  font-weight: bold;
-}
-
-.DENIED {
-  color: red;
-  font-weight: bold;
-}
+  .DENIED {
+    color: red;
+    font-weight: bold;
+  }
 
 
-.course-request-table {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.course-request-table th, .course-request-table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.course-request-table th {
-  background-color: #f2f2f2;
-  color: #333;
-  font-weight: bold;
-}
-
-.course-request-table tr:hover {
-  background-color: #f5f5f5;
-}
-
-@media screen and (max-width: 600px) {
-  .course-request-table th, .course-request-table td {
-    display: block;
+  .course-request-table {
     width: 100%;
-    text-align: right;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
   }
-  
+
   .course-request-table th {
-    text-align: right;
+    background-color: #D3D3D3;
+    color: #333;
+    font-weight: bold;
   }
-}
+
+  .course-request-table tr:hover {
+    background-color: #F2F2F2;
+  }
+
 </style>
 
 {% if not user.is_authenticated %}
