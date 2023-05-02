@@ -63,14 +63,14 @@ def render_template(request):
         # print(url)
         response = requests.get(url)
         response = response.json()
-        # print(response)
+        print(response)
 
         for item in response:
             myclass = UVAClass()
             myclass.class_id = item['crse_id'] + '-' + str(item['crse_offer_nbr'])
             myclass.subject = item['subject']
             myclass.class_description = item['descr']
-            myclass.instructors = item['instructors']
+            myclass.instructors = item['instructors'][0]['name'] + ', ' + item['instructors'][0]['email']
             myclass.units = item['units']
             classes.append(myclass)
 
