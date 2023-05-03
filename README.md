@@ -1,6 +1,6 @@
 # Project B-26
 
-__Name:
+__Name__:
     Fernando Canales Alvarado
     Jeremey Suh
     David "Tripp" Mims
