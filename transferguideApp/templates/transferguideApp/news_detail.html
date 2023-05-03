@@ -1,8 +1,15 @@
 {% extends 'transferguideApp/index.html' %}
 
+{% comment %} 
+SORUCE:
+    https://getbootstrap.com/docs/4.0/content/images/
+{% endcomment %}
+
 {% load static %}
 {% block content %}
-    <h1>{{ news.title }}</h1>
-    <p>{{ news.text }}</p>
-    <p>Date: {{ news.date }}</p>
+    <h1 class="m-3 pb-2 border-bottom border-dark">{{ news.title }}</h1>
+    {% comment %} <img style="width: 100vw; height: 20vw; object-fit: cover;" src="{% static news.img_src %}"> {% endcomment %}
+    <img class="img-fluid img-thumbnail rounded mx-auto d-block" src="{% static news.img_src %}">
+    <p class="m-3">{{ news.text }}</p>
+    <p class="m-5" style="font-style:italic; font-weight: bold;">Published: {{ news.date }}</p>
 {% endblock %}
