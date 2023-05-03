@@ -3,7 +3,7 @@ from django.urls import resolve, reverse
 
 from transferguideApp.views import login, render_template, course_request, list_course_requests, course_request_detail, news_index
 
-
+#Source for testing: https://codereview.stackexchange.com/questions/249173/test-django-urls "How to test Django URLs"
 # Everytime we do not need to interact with database
 class TestUrls(SimpleTestCase):
 
