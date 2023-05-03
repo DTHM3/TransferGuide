@@ -43,18 +43,20 @@
 </head>
 
 <body>
-{% block content %}
+  <div style="position: relative; min-height: 100vh;">
+  {% block content %}
 
-<!--{% if user.is_authenticated %}-->
-<!--  {% if user.is_staff %}-->
-<!--    <p>Welcome, You are a staff logged in as {{ user.username }}</p>-->
-<!--  {% endif %}-->
-<!--{% else %}-->
-<!--  <a href="{% provider_login_url 'google' %}">Login With Google</a>-->
-<!--{% endif %}-->
+  <!--{% if user.is_authenticated %}-->
+  <!--  {% if user.is_staff %}-->
+  <!--    <p>Welcome, You are a staff logged in as {{ user.username }}</p>-->
+  <!--  {% endif %}-->
+  <!--{% else %}-->
+  <!--  <a href="{% provider_login_url 'google' %}">Login With Google</a>-->
+  <!--{% endif %}-->
 
 
-{% endblock %}
+  {% endblock %}
+  </div>
 </body>
 
 <!--footer tutorial citation: https://www.youtube.com/watch?v=4UT2r2MAJKY-->
