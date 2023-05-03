@@ -128,7 +128,7 @@ class TestSearchViews(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'transferguideApp/search.html')
-        self.assertEquals(response.context['classes'][0].instructors, uvaClass.instructors)
+        self.assertEquals(response.context['classes'][0].instructors, 'Paul McBurney, pm8fc@virginia.edu')
 
     # todo: Maybe our responnse should not really be like this
     def test_post_search_bad_search(self):
