@@ -16,7 +16,7 @@ class News(models.Model):
     title = models.CharField(max_length=200)
     text = models.CharField(max_length=200)
     date = models.DateTimeField('date published')
-    img_src = models.CharField(max_length=300)
+    img_src = models.CharField(max_length=300, default="/static/images/transfer.png")
 
 # SOURCES: 
 # https://stackoverflow.com/questions/18676156/how-to-properly-use-the-choices-field-option-in-django
