@@ -3,9 +3,7 @@
 {% load static %}
 {% block content %}
     <h1 class="m-3 pb-2 border-bottom border-dark">{{ news.title }}</h1>
-    {% if news.img_src %}
-        <img style="width: 100vw; height: 20vw; object-fit: cover;" src="{% news.img_src %}">
-    {% endif %}
+    <img style="width: 100vw; height: 20vw; object-fit: cover;" src="{% static news.img_src %}">
     <p class="m-3">{{ news.text }}</p>
     <p class="m-5" style="font-style:italic; font-weight: bold;">Published: {{ news.date }}</p>
 {% endblock %}
