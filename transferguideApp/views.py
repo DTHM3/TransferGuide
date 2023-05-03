@@ -32,8 +32,10 @@ def render_template(request):
         return redirect('login')
     response = None
     classes = []
+    first_load = True
 
     if request.method == 'POST':
+        first_load = False
         search_type = request.POST['searchType']
         search_value = request.POST['search']
         # print(search_type)
@@ -61,6 +63,8 @@ def render_template(request):
         response = response.json()
         print(response)
 
+
+
         for item in response:
             myclass = UVAClass()
             myclass.class_id = item['crse_id'] + '-' + str(item['crse_offer_nbr'])
@@ -71,7 +75,7 @@ def render_template(request):
             classes.append(myclass)
 
 
-    return render(request, 'transferguideApp/search.html', {'classes': classes})
+    return render(request, 'transferguideApp/search.html', {'classes': classes, 'first_load': first_load})
 
 
 def course_request(request):
