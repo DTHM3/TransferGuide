@@ -55,14 +55,14 @@ SOURCES:
 {% else %}
     <h1>Course Equivalency</h1>
     <form method="GET">
-    <label for="transfer_institution">Filter by Transfer Institution:</label>
-    <select id="transfer_institution" name="transfer_institution">
-        <option value="">All</option>
-        {% for institution in institutions %}
-        <option value="{{ institution }}">{{ institution }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Filter</button>
+      <label for="transfer_institution">Filter by Transfer Institution:</label>
+      <select id="transfer_institution" name="transfer_institution">
+          <option value="">All</option>
+          {% for institution in institutions %}
+          <option value="{{ institution }}">{{ institution }}</option>
+          {% endfor %}
+      </select>
+      <button type="submit">Filter</button>
     </form>
     <table class="course-table">
         <thead>
