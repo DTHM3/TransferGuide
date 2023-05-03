@@ -33,7 +33,7 @@
                     </div>
                 {% endfor %}
             </ul>
-        {% else %}
+        {% elif not first_load %}
             <h3 class="justify-text-center">No Classes From Search</h3>
         {% endif %}
     </div>
